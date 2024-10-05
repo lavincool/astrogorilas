@@ -1,0 +1,12 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cuadrado {
+  width: 100px;
+  height: 100px;
+
+  background-color: red;
+}

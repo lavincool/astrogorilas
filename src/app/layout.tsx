@@ -23,9 +23,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body
-        className={`${inter.className} dark text-foreground bg-background min-h-[100vh]`}
-      >
+      <body className={`${inter.className} dark text-foreground bg-background`}>
         <main>{children}</main>
       </body>
     </html>

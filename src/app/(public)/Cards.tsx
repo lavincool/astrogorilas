@@ -1,6 +1,10 @@
 import { Card, CardBody } from "@nextui-org/react";
 import IndividualCard from "./components/Card";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+import {
+  CheckBadgeIcon,
+  CloudIcon,
+  FireIcon,
+} from "@heroicons/react/24/outline";
 
 export default function Cards() {
   return (
@@ -14,8 +18,18 @@ export default function Cards() {
         </CardBody>
       </Card>
       <div className="flex flex-wrap gap-3 justify-center">
-        <IndividualCard />
-        <IndividualCard />
+        <IndividualCard
+          title="Nivel del Riego"
+          icon={<CloudIcon className="w-32 h-32" />}
+          content={"56%"}
+          state="good"
+        />
+        <IndividualCard
+          title="Nivel del Ph"
+          icon={<FireIcon className="w-32 h-32" />}
+          content={"7.5 ph"}
+          state="good"
+        />
       </div>
     </div>
   );

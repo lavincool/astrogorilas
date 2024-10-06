@@ -8,7 +8,7 @@
 .msgs {
   height: 100%;
   overflow-y: auto;
-  background: rgb(48, 48, 53);
+  background: #ffffff;
 
   position: absolute;
   width: calc(100vw - 150px);
@@ -19,4 +19,27 @@
   position: absolute;
   width: calc(100vw - 150px);
   right: 0;
+  background: #595959;
+}
+
+.enviado {
+  background-color: #127f79;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: auto;
+  max-width: 40%;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.recibido {
+  background-color: #5cc123;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: auto;
+  max-width: 40%;
+  margin-top: 10px;
+  margin-left: 10px;
 }

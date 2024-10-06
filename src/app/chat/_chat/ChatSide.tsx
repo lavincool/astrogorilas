@@ -5,8 +5,8 @@ export default function ChatSide() {
   return (
     <div>
       <div className={CSS.msgs}>
-        <p>Mensaje 1</p>
-        <p>Mensaje 2</p>
+        <p className={CSS.enviado}>Mensaje enviado</p>
+        <p className={CSS.recibido}>Mensaje recibido</p>
       </div>
       <div className={CSS.chatfooter}>
         <div className="flex gap-3 m-3">

@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.66",
     "@heroicons/react": "^2.1.5",
+    "@nanostores/react": "ai/react",
     "@nextui-org/react": "^2.4.8",
+    "ai": "^3.4.9",
     "framer-motion": "^11.11.1",
     "next": "14.2.14",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",

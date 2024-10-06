@@ -1,7 +1,5 @@
 .chat {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  background-color: blue;
 }
 
 .cuadrado {
@@ -9,4 +7,11 @@
   height: 100px;
 
   background-color: red;
+}
+
+.chatfooter {
+  position: absolute;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
 }

@@ -1,4 +1,4 @@
-import { CheckBadgeIcon } from "@heroicons/react/24/solid";
+import { CheckBadgeIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { Card, CardBody } from "@nextui-org/react";
 
 export default function LeftDock() {
@@ -8,10 +8,19 @@ export default function LeftDock() {
         <p className="text-large font-bold center mt-3 border-3 m-3 rounded-lg text-green-500 border-green-600">
           Acciones
         </p>
+
         <div className="m-3">
           <Card isHoverable className="m-auto cursor-pointer py-3">
             <CardBody className="w-full m-auto">
-              <CheckBadgeIcon className="w-20 h-20 text-green-400 m-auto" />
+              <CheckBadgeIcon className="w-20 h-20 text-green-500 m-auto" />
+            </CardBody>
+          </Card>
+        </div>
+
+        <div className="m-3">
+          <Card isHoverable className="m-auto cursor-pointer py-3">
+            <CardBody className="w-full m-auto">
+              <HeartIcon className="w-20 h-20 text-red-600 m-auto" />
             </CardBody>
           </Card>
         </div>

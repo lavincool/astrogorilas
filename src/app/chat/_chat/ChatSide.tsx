@@ -63,30 +63,13 @@ export default function ChatSide() {
             onChange={(event) => {
               setInput(event.target.value);
             }}
+            size="lg"
           />
           <Button
+            size="lg"
             color="success"
             variant="bordered"
-            onPress={
-              handleSubmit
-              /*async () => {
-              const { messages, newMessage } = await continueConversation([
-                ...conversation,
-                { role: "user", content: input },
-              ]);
-
-              let textContent = "";
-
-              for await (const delta of readStreamableValue(newMessage)) {
-                textContent = `${textContent}${delta}`;
-
-                setConversation([
-                  ...messages,
-                  { role: "assistant", content: textContent },
-                ]);
-              }
-            */
-            }
+            onPress={handleSubmit}
             isDisabled={loading}
             isLoading={loading}
           >

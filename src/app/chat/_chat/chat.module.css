@@ -19,16 +19,18 @@
   position: absolute;
   width: calc(100vw - 100px);
   right: 0;
-  background: #2e2e2e;
+  background: #1b1b1b;
 }
 
 .enviado {
-  background-color: #127f79;
-  color: white;
+  border: 2px solid;
+  border-color: #2e2e2e;
+  color: #2e2e2e;
   padding: 10px;
   border-radius: 10px;
   margin-left: auto;
-  max-width: 40%;
+  font-weight: 600;
+  max-width: fit-content;
   margin-right: 10px;
 }
 
@@ -38,8 +40,8 @@
 }
 
 .recibido {
-  background-color: #5cc123;
-  color: black;
+  background-color: #1a1a1a;
+  color: #fff;
   padding: 10px;
   border-radius: 10px;
   margin-right: auto;

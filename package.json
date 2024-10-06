@@ -12,6 +12,7 @@
     "@ai-sdk/openai": "^0.0.66",
     "@heroicons/react": "^2.1.5",
     "@nanostores/react": "ai/react",
+    "@neondatabase/serverless": "^0.9.5",
     "@nextui-org/react": "^2.4.8",
     "ai": "^3.4.9",
     "framer-motion": "^11.11.1",

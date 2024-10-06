@@ -7,7 +7,7 @@ import { useState } from "react";
 import IndividualMsg from "./IndividualMsg";
 import { Poppins } from "next/font/google";
 
-import type { ChatGPTMessage } from "../random/types/openai";
+import type { ChatGPTMessage } from "./types/openai";
 
 const poppins = Poppins({
   weight: "400",
@@ -62,10 +62,8 @@ export default function ChatSide() {
   };
   return (
     <div>
-      <div
-        className={`${CSS.msgs}, backgroundImage: url("https://devcloud.raza.cool/astro/AIcolorbl.png")`}
-      >
-        <div className={CSS.msgs}>
+      <div className={`${CSS.msgs}`} style={{ paddingTop: 0 }}>
+        <div className={CSS.msgs} style={{ paddingBottom: "70px" }}>
           {messages.length === 0 && !isSending && (
             <div className="m-auto center">
               <IndividualMsg
@@ -132,34 +130,31 @@ const handleFunction = async (
 ) => {
   console.log("FUNCTION CALL", functionCall);
   console.log("messagesToSend", messagesToSend);
-  switch (functionCall?.name) {
-    case "get_vegetation_days":
-      try {
-        const functionArguments = JSON.parse(functionCall.arguments);
-        const emailResponse = await fetch("/api/data", {
-          method: "POST",
-          body: JSON.stringify({
-            instruction: functionArguments.instruction,
-          }),
-        });
-        const emailData = await emailResponse.json();
-        console.log(emailData);
-        const functionCallMessage: ChatGPTMessage = {
-          role: "assistant",
-          content: `Se proceso: ${emailData?.message}`,
-        };
-        setMessages([...messagesToSend, functionCallMessage]);
-      } catch (error) {
-        console.log(error);
-        const functionCallMessage: ChatGPTMessage = {
-          role: "assistant",
-          content: `There is an error. I couldn't send the email. Please try again.`,
-        };
-        setMessages([...messagesToSend, functionCallMessage]);
-      }
-      break;
-
-    default:
-      break;
+  if (functionCall?.name) {
+    try {
+      const functionArguments = JSON.parse(functionCall.arguments);
+      const response = await fetch("/api/data", {
+        method: "POST",
+        body: JSON.stringify({
+          instruction: functionArguments.instruction,
+          type: functionCall?.name,
+        }),
+      });
+      const data = await response.json();
+      console.log("LA DATA ESSS", data);
+      const functionCallMessage: ChatGPTMessage = {
+        role: "assistant",
+        content: `${data?.content}`,
+      };
+      console.log("CALL MSGS", functionCallMessage);
+      setMessages([...messagesToSend, functionCallMessage]);
+    } catch (error) {
+      console.log(error);
+      const functionCallMessage: ChatGPTMessage = {
+        role: "assistant",
+        content: `There is an error. I couldn't send the email. Please try again.`,
+      };
+      setMessages([...messagesToSend, functionCallMessage]);
+    }
   }
 };

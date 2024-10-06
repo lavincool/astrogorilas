@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server";
 import { Configuration, OpenAIApi } from "openai";
 
-import type { ChatGPTFunction } from "../chat/random/types/openai";
+import type { ChatGPTFunction } from "../chat/_chat/types/openai";
 
 const functions: ChatGPTFunction[] = [
   {
@@ -33,6 +33,20 @@ const functions: ChatGPTFunction[] = [
     name: "get_vegetation_days",
     description:
       "Analyze the vegetation days, get the vegetation days and stadistics",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "growing_degree_days_accumulated",
+    description: "Analyze the dregree days acumulated",
     parameters: {
       type: "object",
       properties: {

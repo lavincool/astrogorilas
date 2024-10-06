@@ -1,4 +1,4 @@
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@nextui-org/react";
 import IndividualCard from "./components/Card";
 import {
   CheckBadgeIcon,
@@ -30,7 +30,18 @@ export default function Cards() {
           content={"7.5 ph"}
           state="good"
         />
+        <div className="relative">
+          <Image src="https://devcloud.raza.cool/astro/plant_emoji_v2.png" />
+        </div>
       </div>
     </div>
   );
 }
+/*
+          <p
+            className="absolute font-semibold text-2xl border-2 rounded p-2 border-zinc-700 bg-zinc-800 text-white"
+            style={{ right: "16.5%", bottom: "23px" }}
+          >
+            Analizar cultivo
+          </p>
+*/

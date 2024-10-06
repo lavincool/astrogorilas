@@ -10,7 +10,8 @@ export default function IndividualCard({
     <div>
       <Card
         isFooterBlurred
-        className={`w-[300px] h-[240px] col-span-12 sm:col-span-5 border-3 ${getColorState(state)}`}
+        className={`w-[300px] h-[240px] col-span-12 sm:col-span-5 border-3 ${getColorState(state)} cursor-pointer`}
+        isHoverable
       >
         <CardHeader className="p-2">
           <h3 className={"text-2xl center font-semibold m-auto"}>{title}</h3>

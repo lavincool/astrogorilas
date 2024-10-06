@@ -4,19 +4,18 @@ import { Card, CardBody, Image } from "@nextui-org/react";
 export default function LeftDock() {
   return (
     <>
-      <div
-        className="absolute text-center w-[100px] h-[100vh]"
-        style={{ backgroundColor: "#9B9B9B" }}
-      >
-        <Image
-          src="https://devcloud.raza.cool/astro/iaa.png"
-          alt="Imagen xd"
-          className="w-[100px] h-[100px] mx-auto mt-3"
-        />
-
-        <p className="text-large font-bold center mt-3 border-3 m-3 rounded-lg text-blue-500 border-green-600">
-          Accesos
-        </p>
+      <div className="absolute text-center w-[100px] h-[100vh] bg-zinc-900">
+        <div className="m-3">
+          <Image
+            src="https://devcloud.raza.cool/astro/iaa.png"
+            width={76}
+            height={71}
+            alt="Imagen xd"
+          />
+          <p className="text-large font-bold center mt-3 border-3rounded-lg text-white border-green-600">
+            Accesos
+          </p>
+        </div>
 
         <div className="m-3">
           <Card

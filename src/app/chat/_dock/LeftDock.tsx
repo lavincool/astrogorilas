@@ -1,5 +1,11 @@
 import { CheckBadgeIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { Card, CardBody, Image } from "@nextui-org/react";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  weight: "600",
+  subsets: ["latin"],
+});
 
 export default function LeftDock() {
   return (
@@ -8,28 +14,40 @@ export default function LeftDock() {
         <div className="m-3">
           <Image
             src="https://devcloud.raza.cool/astro/iaa.png"
-            width={76}
-            height={71}
+            width={66}
+            height={61}
             alt="Imagen xd"
+            style={{ borderRadius: "0" }}
           />
-          <p className="text-large font-bold center mt-3 border-3rounded-lg text-white border-green-600">
-            Accesos
+          <p
+            className={`text-large ${poppins.className} mt-3 text-white border-green-600`}
+          >
+            FAIMER
           </p>
         </div>
 
         <div className="m-3">
           <Card
             isHoverable
-            className="m-auto cursor-pointer flex items-center justify-center"
+            className="m-auto cursor-pointer flex items-center justify-center border-none transition-transform duration-200 transform active:scale-95 hover:shadow-lg"
             style={{
-              backgroundColor: "#127F79",
+              backgroundColor: "#7FDE4A",
               width: "60px",
               height: "60px",
               borderRadius: "50%",
             }}
           >
-            <CardBody className="flex items-center justify-center w-full h-full">
-              <CheckBadgeIcon className="w-8 h-8 text-green-500" />
+            <CardBody className="flex items-center justify-center w-full h-full p-0">
+              <Image
+                src="https://devcloud.raza.cool/astro/amor.png"
+                width={40}
+                height={40}
+                alt="Descripción de la imagen"
+                style={{
+                  objectFit: "contain",
+                  borderRadius: "10%",
+                }}
+              />
             </CardBody>
           </Card>
         </div>
@@ -37,16 +55,51 @@ export default function LeftDock() {
         <div className="m-3">
           <Card
             isHoverable
-            className="m-auto cursor-pointer flex items-center justify-center transition-colors duration-200 hover:bg-blue-600"
+            className="m-auto cursor-pointer flex items-center justify-center border-none transition-transform duration-200 transform active:scale-95 hover:shadow-lg"
             style={{
-              backgroundColor: "#9B9B9B",
+              backgroundColor: "#19AFA8",
               width: "60px",
               height: "60px",
               borderRadius: "50%",
             }}
           >
-            <CardBody className="flex items-center justify-center w-full h-full">
-              <HeartIcon className="w-8 h-8 text-red-500" />
+            <CardBody className="flex items-center justify-center w-full h-full p-0">
+              <Image
+                src="https://devcloud.raza.cool/astro/regando-plantas.png"
+                width={35}
+                height={35}
+                alt="Descripción de la imagen"
+                style={{
+                  objectFit: "contain",
+                  borderRadius: "10%",
+                }}
+              />
+            </CardBody>
+          </Card>
+        </div>
+
+        <div className="m-3">
+          <Card
+            isHoverable
+            className="m-auto cursor-pointer flex items-center justify-center transition-transform duration-200 transform active:scale-95 hover:shadow-lg"
+            style={{
+              backgroundColor: "#C18243",
+              width: "60px",
+              height: "60px",
+              borderRadius: "50%",
+            }}
+          >
+            <CardBody className="flex items-center justify-center w-full h-full p-0">
+              <Image
+                src="https://devcloud.raza.cool/astro/saco.png"
+                width={35}
+                height={35}
+                alt="Descripción de la imagen"
+                style={{
+                  objectFit: "contain",
+                  borderRadius: "10%",
+                }}
+              />
             </CardBody>
           </Card>
         </div>

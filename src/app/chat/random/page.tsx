@@ -9,14 +9,15 @@ import ChatBox from "./components/ChatBox";
 export default function IndexPage() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>([]);
   const [isSending, setIsSending] = useState(false);
+
   const sendMessageHandler = async (message: string) => {
-    console.log("MESSAGES TO SEND", messages);
     const messagesToSend: ChatGPTMessage[] = [
       ...messages,
       { role: "user", content: message },
     ];
-    console.log(messagesToSend);
+
     setMessages(messagesToSend);
+
     try {
       setIsSending(true);
       const response = await fetch("/api", {
@@ -25,16 +26,15 @@ export default function IndexPage() {
           messages: messagesToSend,
         }),
       });
+
       const data = await response.json();
-      console.log("LA DATA SOOOOO", data);
-      // Check if it's a function call
+
       if (data?.function_call) {
         console.log(data);
 
         console.log(data?.function_call);
         const functionCall = data.function_call;
         handleFunction(functionCall, setMessages, messagesToSend);
-        // Send email
       }
 
       setMessages([...messagesToSend, data]);
@@ -85,7 +85,7 @@ const handleFunction = async (
         console.log(error);
         const functionCallMessage: ChatGPTMessage = {
           role: "assistant",
-          content: `There is an error. I couldn't send the email. Please try again.`,
+          content: "No se pudo procesar el mensaje",
         };
         setMessages([...messagesToSend, functionCallMessage]);
       }

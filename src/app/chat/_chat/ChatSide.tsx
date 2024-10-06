@@ -3,13 +3,11 @@
 import { Button, Input } from "@nextui-org/react";
 import CSS from "./chat.module.css";
 
-import { useEffect, useState } from "react";
-import { type Message, continueConversation } from "../_chat/actions";
-import { readStreamableValue } from "ai/rsc";
+import { useState } from "react";
 import IndividualMsg from "./IndividualMsg";
 import { Poppins } from "next/font/google";
 
-import { Image } from "@nextui-org/react";
+import type { ChatGPTMessage } from "../random/types/openai";
 
 const poppins = Poppins({
   weight: "400",
@@ -17,33 +15,49 @@ const poppins = Poppins({
 });
 
 export default function ChatSide() {
-  const [conversation, setConversation] = useState<Message[]>([]);
-  const [input, setInput] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const handleSubmit = async () => {
-    setLoading(true);
-    const { messages, newMessage } = await continueConversation([
-      ...conversation,
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<ChatGPTMessage[]>([]);
+  const [isSending, setIsSending] = useState(false);
+  const sendMessageHandler = async () => {
+    console.log("MESSAGES TO SEND", messages);
+    const messagesToSend: ChatGPTMessage[] = [
+      ...messages,
       { role: "user", content: input },
-    ]);
-
-    let textContent = "";
-
-    for await (const delta of readStreamableValue(newMessage)) {
-      textContent = `${textContent}${delta}`;
-
-      setConversation([
-        ...messages,
-        { role: "assistant", content: textContent },
-      ]);
-    }
+    ];
     setInput("");
-    setLoading(false);
+    console.log(messagesToSend);
+    setMessages(messagesToSend);
+    try {
+      setIsSending(true);
+      const response = await fetch("/api", {
+        method: "POST",
+        body: JSON.stringify({
+          messages: messagesToSend,
+        }),
+      });
+      const data = await response.json();
+      console.log("LA DATA SOOOOO", data);
+      // Check if it's a function call
+      if (data?.function_call) {
+        console.log(data);
+
+        console.log(data?.function_call);
+        const functionCall = data.function_call;
+        handleFunction(functionCall, setMessages, messagesToSend);
+        // Send email
+      }
+
+      setMessages([...messagesToSend, data]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSending(false);
+    }
   };
-  const handleKeyDown = (e: { key: string }) => {
-    if (e.key === "Enter") {
-      handleSubmit();
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      sendMessageHandler();
     }
   };
   return (
@@ -52,7 +66,7 @@ export default function ChatSide() {
         className={`${CSS.msgs}, backgroundImage: url("https://devcloud.raza.cool/astro/AIcolorbl.png")`}
       >
         <div className={CSS.msgs}>
-          {conversation.length === 0 && !loading && (
+          {messages.length === 0 && !isSending && (
             <div className="m-auto center">
               <IndividualMsg
                 own="assistant"
@@ -62,7 +76,7 @@ export default function ChatSide() {
             </div>
           )}
 
-          {conversation.map((message, index) => (
+          {messages.map((message, index) => (
             <div
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               key={index}
@@ -71,7 +85,7 @@ export default function ChatSide() {
               <IndividualMsg own={message.role} msg={message.content} />
             </div>
           ))}
-          {conversation.length === 0 && loading && (
+          {messages.length === 0 && isSending && (
             <IndividualMsg
               own="assistant"
               msg="Estoy procesando tu solicitud..."
@@ -86,7 +100,7 @@ export default function ChatSide() {
             placeholder="Escribir aquí"
             value={input}
             onKeyDown={handleKeyDown}
-            isDisabled={loading}
+            isDisabled={isSending}
             onChange={(event) => {
               setInput(event.target.value);
             }}
@@ -96,9 +110,9 @@ export default function ChatSide() {
             size="lg"
             color="success"
             variant="bordered"
-            onPress={handleSubmit}
-            isDisabled={loading}
-            isLoading={loading}
+            onPress={sendMessageHandler}
+            isDisabled={isSending}
+            isLoading={isSending}
           >
             Enviar
           </Button>
@@ -107,3 +121,45 @@ export default function ChatSide() {
     </div>
   );
 }
+
+const handleFunction = async (
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  functionCall: any,
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  setMessages: any,
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  messagesToSend: any,
+) => {
+  console.log("FUNCTION CALL", functionCall);
+  console.log("messagesToSend", messagesToSend);
+  switch (functionCall?.name) {
+    case "get_vegetation_days":
+      try {
+        const functionArguments = JSON.parse(functionCall.arguments);
+        const emailResponse = await fetch("/api/data", {
+          method: "POST",
+          body: JSON.stringify({
+            instruction: functionArguments.instruction,
+          }),
+        });
+        const emailData = await emailResponse.json();
+        console.log(emailData);
+        const functionCallMessage: ChatGPTMessage = {
+          role: "assistant",
+          content: `Se proceso: ${emailData?.message}`,
+        };
+        setMessages([...messagesToSend, functionCallMessage]);
+      } catch (error) {
+        console.log(error);
+        const functionCallMessage: ChatGPTMessage = {
+          role: "assistant",
+          content: `There is an error. I couldn't send the email. Please try again.`,
+        };
+        setMessages([...messagesToSend, functionCallMessage]);
+      }
+      break;
+
+    default:
+      break;
+  }
+};

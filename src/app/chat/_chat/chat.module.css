@@ -1,0 +1,22 @@
+.chatfooter {
+  position: absolute;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+}
+
+.msgs {
+  height: 100%;
+  overflow-y: auto;
+  background: rgb(48, 48, 53);
+
+  position: absolute;
+  width: calc(100vw - 150px);
+  right: 0;
+}
+
+.chatfooter {
+  position: absolute;
+  width: calc(100vw - 150px);
+  right: 0;
+}

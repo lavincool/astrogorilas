@@ -58,6 +58,20 @@ const functions: ChatGPTFunction[] = [
       required: ["instruction"],
     },
   },
+  {
+    name: "air_quality",
+    description: "Analyze the air quality",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
 ];
 
 export async function POST(request: Request) {

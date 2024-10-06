@@ -5,7 +5,7 @@ export default function LeftDock() {
   return (
     <>
       <div
-        className="absolute text-center w-[150px] h-[100vh]"
+        className="absolute text-center w-[100px] h-[100vh]"
         style={{ backgroundColor: "#9B9B9B" }}
       >
         <Image

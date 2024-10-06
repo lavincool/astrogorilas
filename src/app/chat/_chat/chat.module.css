@@ -29,8 +29,12 @@
   border-radius: 10px;
   margin-left: auto;
   max-width: 40%;
-  margin-top: 10px;
   margin-right: 10px;
+}
+
+.enviado, .recibido {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .recibido {
@@ -39,7 +43,6 @@
   padding: 10px;
   border-radius: 10px;
   margin-right: auto;
-  max-width: 40%;
-  margin-top: 10px;
+  width: fit-content;
   margin-left: 10px;
 }

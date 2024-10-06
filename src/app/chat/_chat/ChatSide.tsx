@@ -11,20 +11,44 @@ import IndividualMsg from "./IndividualMsg";
 export default function ChatSide() {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (conversation) {
-      setInput("");
+  const handleSubmit = async () => {
+    setLoading(true);
+    const { messages, newMessage } = await continueConversation([
+      ...conversation,
+      { role: "user", content: input },
+    ]);
+
+    let textContent = "";
+
+    for await (const delta of readStreamableValue(newMessage)) {
+      textContent = `${textContent}${delta}`;
+
+      setConversation([
+        ...messages,
+        { role: "assistant", content: textContent },
+      ]);
     }
-  }, [conversation]);
+    setInput("");
+    setLoading(false);
+  };
+  const handleKeyDown = (e: { key: string }) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
   return (
     <div>
       <div className={CSS.msgs}>
         <p className={CSS.enviado}>Mensaje enviado</p>
         <p className={CSS.recibido}>Mensaje recibido</p>
         {conversation.map((message, index) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-          <div key={index}>
+          <div
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+            key={index}
+            className={message.role === "user" ? "" : "max-w-[90%]"}
+          >
             <IndividualMsg own={message.role} msg={message.content} />
           </div>
         ))}
@@ -34,6 +58,8 @@ export default function ChatSide() {
           <Input
             placeholder="Escribir aquí"
             value={input}
+            onKeyDown={handleKeyDown}
+            isDisabled={loading}
             onChange={(event) => {
               setInput(event.target.value);
             }}
@@ -41,7 +67,9 @@ export default function ChatSide() {
           <Button
             color="success"
             variant="bordered"
-            onClick={async () => {
+            onPress={
+              handleSubmit
+              /*async () => {
               const { messages, newMessage } = await continueConversation([
                 ...conversation,
                 { role: "user", content: input },
@@ -57,7 +85,10 @@ export default function ChatSide() {
                   { role: "assistant", content: textContent },
                 ]);
               }
-            }}
+            */
+            }
+            isDisabled={loading}
+            isLoading={loading}
           >
             Enviar
           </Button>

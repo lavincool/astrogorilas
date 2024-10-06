@@ -13,6 +13,7 @@
   position: absolute;
   width: calc(100vw - 100px);
   right: 0;
+  padding: 5px;
 }
 
 .chatfooter {
@@ -44,7 +45,22 @@
   color: #fff;
   padding: 10px;
   border-radius: 10px;
-  margin-right: auto;
+  margin-right: 10px;
   width: fit-content;
   margin-left: 10px;
+}
+
+
+.welcome {
+  color: #fff;
+  border-radius: 10px;
+  width: fit-content;
+  position: absolute;
+  margin: auto;
+  filter: opacity(0.6);
+  left: 20%;
+}
+
+.centered {
+  margin: auto;
 }

@@ -72,6 +72,203 @@ const functions: ChatGPTFunction[] = [
       required: ["instruction"],
     },
   },
+  {
+    name: "cold_index",
+    description: "Analyze the cold index, indice del frio",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "heavy_rain_days",
+    description: "Analyze the heavy rain days",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "drought_index",
+    description: "Analyze the drought index, indice de sequia",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "evapotranspiration_1h",
+    description: "Analyze the evapotranspiration",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "fosberg_fire_weather_index",
+    description: "Analisa el indice de fuego de fosberg",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "heat_index",
+    description: "Analyze the heat index, indice de calor",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "rain_water",
+    description: "Analyze the rain water, porcentaje de lluvia",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "salinity",
+    description: "Analyze the salinity, salinidad del agua",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "soil_moisture_index",
+    description: "Analyze the soil moisture index, indice de humedad del suelo",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "soil_type",
+    description: "Analyze the soil type, tipo de suelo",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "volumetric_soil_water",
+    description:
+      "Analyze the volumetric soil water, agua volumetrica del suelo",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "t_-15cm",
+    description: "Analisa la temperatura semanal",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "total_cloud_cover",
+    description: "Analyze the total cloud cover, cobertura de nubes",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
+  {
+    name: "wet_bulb_t_2m",
+    description: "Analisa la temperatura de bulbo humedo",
+    parameters: {
+      type: "object",
+      properties: {
+        instruction: {
+          type: "string",
+          description: "The user instruction to call the function",
+        },
+      },
+      required: ["instruction"],
+    },
+  },
 ];
 
 export async function POST(request: Request) {
